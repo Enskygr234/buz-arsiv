@@ -1,0 +1,242 @@
+<Application x:Class="BuzArsiv.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <FontFamily x:Key="Yazi">Segoe UI Variable Text, Segoe UI</FontFamily>
+
+        <!-- Renkler: Ayaz Launcher ve Ayazle ile aynı buz paleti -->
+        <SolidColorBrush x:Key="Zemin" Color="#0E1C30"/>
+        <SolidColorBrush x:Key="Zemin2" Color="#13253D"/>
+        <SolidColorBrush x:Key="Kart" Color="#182D49"/>
+        <SolidColorBrush x:Key="KartUstu" Color="#21406A"/>
+        <SolidColorBrush x:Key="Cizgi" Color="#2A4466"/>
+        <SolidColorBrush x:Key="Yazi1" Color="#EAF4FF"/>
+        <SolidColorBrush x:Key="Soluk" Color="#8FB3D9"/>
+        <SolidColorBrush x:Key="Buz" Color="#4FB3E0"/>
+        <SolidColorBrush x:Key="BuzKoyu" Color="#06121F"/>
+        <SolidColorBrush x:Key="Kor" Color="#F0A03C"/>
+
+        <!-- İnce, koyu kaydırma çubuğu -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinWidth" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Track x:Name="PART_Track" IsDirectionReversed="True">
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Border CornerRadius="4" Background="#3A5A80" Margin="2,2"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Düğmeler -->
+        <Style x:Key="Dugme" TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource Yazi1}"/>
+            <Setter Property="Background" Value="{StaticResource Kart}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Cizgi}"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="B" CornerRadius="9" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Opacity" Value="0.85"/>
+                                <Setter TargetName="B" Property="BorderBrush" Value="#4F7BAE"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="B" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="B" Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AnaDugme" TargetType="Button" BasedOn="{StaticResource Dugme}">
+            <Setter Property="Background" Value="{StaticResource Buz}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Buz}"/>
+            <Setter Property="Foreground" Value="{StaticResource BuzKoyu}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="SadeDugme" TargetType="Button" BasedOn="{StaticResource Dugme}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource Soluk}"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+
+        <!-- Yan menü sekmeleri -->
+        <Style x:Key="Sekme" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{StaticResource Soluk}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="B" CornerRadius="10" Padding="14,10" Background="Transparent">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#16304E"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{StaticResource KartUstu}"/>
+                                <Setter Property="Foreground" Value="{StaticResource Yazi1}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Süzgeç ve seçenek çipleri -->
+        <Style x:Key="Cip" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{StaticResource Soluk}"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Margin" Value="0,0,6,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="B" CornerRadius="14" Padding="12,5" Background="{StaticResource Kart}"
+                                BorderBrush="{StaticResource Cizgi}" BorderThickness="1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="BorderBrush" Value="#4F7BAE"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{StaticResource Buz}"/>
+                                <Setter TargetName="B" Property="BorderBrush" Value="{StaticResource Buz}"/>
+                                <Setter Property="Foreground" Value="{StaticResource BuzKoyu}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Aç / kapa anahtarı -->
+        <Style x:Key="Anahtar" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource Yazi1}"/>
+            <Setter Property="FontSize" Value="13.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal" Background="Transparent">
+                            <Border x:Name="Yol" Width="38" Height="20" CornerRadius="10" Background="#2A4466" VerticalAlignment="Center">
+                                <Ellipse x:Name="Top" Width="14" Height="14" Fill="#B9CFE0" HorizontalAlignment="Left" Margin="3,0"/>
+                            </Border>
+                            <ContentPresenter Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Yol" Property="Background" Value="{StaticResource Buz}"/>
+                                <Setter TargetName="Top" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="Top" Property="Fill" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Liste satırı -->
+        <Style x:Key="Satir" TargetType="ListBoxItem">
+            <Setter Property="Foreground" Value="{StaticResource Yazi1}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="B" CornerRadius="10" Padding="10,7" Background="Transparent">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#1A3352"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{StaticResource KartUstu}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Liste" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource Satir}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="VirtualizingPanel.IsVirtualizing" Value="True"/>
+            <Setter Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="True"/>
+            <Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
+        </Style>
+
+        <Style x:Key="Kutu" TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource Yazi1}"/>
+            <Setter Property="Background" Value="{StaticResource Kart}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Cizgi}"/>
+            <Setter Property="CaretBrush" Value="{StaticResource Yazi1}"/>
+            <Setter Property="SelectionBrush" Value="{StaticResource Buz}"/>
+            <Setter Property="FontSize" Value="13.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="9" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1" Padding="10,6">
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Dosya satırı: simge, ad, klasör, zaman -->
+        <DataTemplate x:Key="DosyaSablonu">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Simge}" Width="28" Height="28" Margin="0,0,12,0" VerticalAlignment="Center"
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Ad}" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="{Binding Klasor}" FontSize="11.5" Foreground="{StaticResource Soluk}" TextTrimming="CharacterEllipsis" Margin="0,1,0,0"/>
+                </StackPanel>
+                <TextBlock Grid.Column="2" Text="{Binding Zaman}" FontSize="11.5" Foreground="{StaticResource Soluk}"
+                           VerticalAlignment="Center" Margin="12,0,2,0"/>
+            </Grid>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
