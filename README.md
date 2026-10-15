@@ -68,3 +68,19 @@ Ad, buzlu arama çubuğu artı pencere düzeni, `Ctrl + Shift + F` kısayolu ve 
 ## Lisans
 
 [MIT](LICENSE) © Winterdeveloper
+
+<!-- ENS:ALT -->
+---
+
+<div align="center">
+
+**❄️ ENS Developer'ın diğer projeleri**
+
+🖥️ Windows: [Ayaz Launcher](https://github.com/Enskygr234/Ayaz-launcher) · [Masaüstü Kar](https://github.com/Enskygr234/masaustu-kar) · [Klavye Ayazı](https://github.com/Enskygr234/klavye-ayazi) · [ayaz](https://github.com/Enskygr234/ayaz) · [Güvenlik Kilidi](https://github.com/Enskygr234/GuvenlikKilidi)
+
+[🌐 Bütün projeler](https://enskygr234.github.io/ensdewloper.github.io/) · [👤 GitHub profilim](https://github.com/Enskygr234)
+
+<sub>Kış gelir, kod yazılır.</sub>
+
+</div>
+<!-- /ENS:ALT -->
